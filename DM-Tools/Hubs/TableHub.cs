@@ -28,6 +28,17 @@ namespace DMTools.Hubs
             return base.OnConnected();
         }
 
+        public override Task OnDisconnected(bool stopCalled)
+        {
+            foreach (var table in Table.AllTables.Values)
+            {
+                string name = table.RemoveUser(Context.ConnectionId);
+                if (name != null)
+                    Clients.Group(table.ID.ToString()).showMessage(name + " left the table.");
+            }
+            return base.OnDisconnected(stopCalled);
+        }
+
         public async void Join(int table, string name)
         {
             Table t = GetTable(table);
@@ -40,9 +51,9 @@ namespace DMTools.Hubs
                 return;
             }
 
-            t.UserNamesByID.Add(Context.ConnectionId, name);
-            t.UserNames.Add(name);
-
+            var isDM = t.AddUser(Context.ConnectionId, name);
+            Clients.Caller.setupUi(isDM);
+            Clients.Caller.showMessage(isDM ? "You are the DM" : t.DM + " is the DM");
             await Groups.Add(Context.ConnectionId, table.ToString());
             Clients.Group(table.ToString()).showMessage(name + " joined the table.");
         }
@@ -53,8 +64,8 @@ namespace DMTools.Hubs
             if (t == null)
                 return;
 
-            string userName;
-            if (!t.UserNamesByID.TryGetValue(Context.ConnectionId, out userName))
+            string userName = t.GetUserName(Context.ConnectionId);
+            if (userName == null)
                 return;
 
             Clients.Group(table.ToString()).showChatMessage(userName, message);

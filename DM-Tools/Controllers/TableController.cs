@@ -12,18 +12,15 @@ namespace DMTools.Controllers
     {
         public ActionResult Create()
         {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Create(string name)
-        {
-            Table t = new Table(name);
+            Table t = new Table();
             return RedirectToAction("Index", new { id = t.ID });
         }
 
         public ActionResult Index(int id)
         {
+            if (!Table.AllTables.ContainsKey(id))
+                return RedirectToAction("Index", "Home");
+
             ViewBag.TableID = id;
             return View();
         }
