@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Owin;
+using Owin;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,6 +9,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
+[assembly: OwinStartup(typeof(DMTools.MvcApplication))]
 namespace DMTools
 {
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
@@ -23,6 +26,11 @@ namespace DMTools
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
+        }
+
+        public void Configuration(IAppBuilder app)
+        {
+            app.MapSignalR();
         }
     }
 }

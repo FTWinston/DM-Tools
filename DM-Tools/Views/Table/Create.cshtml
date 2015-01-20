@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "Create New Table";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Create", "Table", FormMethod.Post))
+{
+    <div class="container">
+        Enter your name: <input type="text" name="name" />
+
+        <input type="submit" value="Create" />
+    </div>   
+}
