@@ -9,6 +9,13 @@ $(function () {
     table = $.connection.tableHub;
     table.client.showMessage = showMessage;
 
+    table.client.forceRename = function () {
+        do {
+            userName = prompt('That name is taken. Enter your name:', '');
+        } while (userName == '');
+        table.server.join(tableID, userName);
+    };
+
     table.client.showChatMessage = function (name, message) {
         $('#chat').append('<li><strong>' + htmlEncode(name) + '</strong>: ' + htmlEncode(message) + '</li>');
     };

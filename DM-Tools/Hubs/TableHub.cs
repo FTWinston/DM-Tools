@@ -46,13 +46,20 @@ namespace DMTools.Hubs
             if (t == null)
                 return;
 
-            if (!t.IsNameAvailable(name))
+            bool isDM;
+            if (t.GetUserName(Context.ConnectionId) == null)
             {
-                Clients.Caller.showMessage("That name is already taken");
-                return;
-            }
+                if (!t.IsNameAvailable(name))
+                {
+                    Clients.Caller.forceRename();
+                    return;
+                }
 
-            var isDM = t.AddUser(Context.ConnectionId, name);
+                isDM = t.AddUser(Context.ConnectionId, name);
+            }
+            else
+                isDM = name == t.DM;
+
             Clients.Caller.setupUi(isDM);
             Clients.Caller.showMessage(isDM ? "You are the DM" : t.DM + " is the DM");
             await Groups.Add(Context.ConnectionId, table.ToString());
