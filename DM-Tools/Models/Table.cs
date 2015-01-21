@@ -39,7 +39,7 @@ namespace DMTools.Models
 
         public bool AddUser(string connectionID, string name)
         {
-            bool isDM = UserNamesByID.Count == 0;
+            bool isDM = DM == null || DM == name;
             if (isDM)
                 DM = name;
 
