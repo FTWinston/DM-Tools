@@ -6,6 +6,7 @@ using Microsoft.AspNet.SignalR;
 using System.Threading.Tasks;
 using System.Web.Security;
 using DMTools.Models;
+using DMTools.Services;
 
 namespace DMTools.Hubs
 {
@@ -68,7 +69,44 @@ namespace DMTools.Hubs
             if (userName == null)
                 return;
 
-            Clients.Group(table.ToString()).showChatMessage(userName, message);
+            if (message.StartsWith("/"))
+            {
+                var space = message.IndexOf(' ');
+                string command, args;
+                if (space == -1)
+                {
+                    command = message.Substring(1);
+                    args = string.Empty;
+                }
+                else
+                {
+                    command = message.Substring(1, space - 1);
+                    args = message.Substring(space + 1);
+                }
+                try
+                {
+                    HandleCommand(t, userName, command.ToLower(), args);
+                }
+                catch
+                {
+                    Clients.Caller.showMessage("Unable to process command: " + command);
+                }
+            }
+            else
+                Clients.Group(table.ToString()).showChatMessage(userName, message);
+        }
+
+        private void HandleCommand(Table table, string userName, string command, string args)
+        {
+            switch(command)
+            {
+                case "roll":
+                    Clients.Caller.showDiceRoll(userName, DiceService.Roll(args));
+                    break;
+                default:
+                    Clients.Caller.showMessage("Invalid command: " + command);
+                    break;
+            }
         }
     }
 }

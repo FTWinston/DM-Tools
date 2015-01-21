@@ -24,6 +24,10 @@
             table.client.showMessage = function (message) {
                 $('#discussion').append('<li><em>' + htmlEncode(message) + '</em></li>');
             };
+
+            table.client.showDiceRoll = function (user, roll) {
+                $('#discussion').append('<li><em>' + htmlEncode(user) + ' rolls: ' + roll + '</em></li>');
+            };
             
             table.client.setupUi = function (isDM) {
                 console.log(isDM ? "You are the DM" : "You are not the DM");
