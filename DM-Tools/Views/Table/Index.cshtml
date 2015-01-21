@@ -2,7 +2,18 @@
     ViewBag.Title = "Table";
 }
 
-<div class="content">
+<div id="tableContent">
+    <ul class="modeSelector">
+        <li target="tabVideo">Video</li>
+        <li target="tabWhiteboard">Whiteboard</li>
+    </ul>
+
+    <div class="modeTab" id="tabVideo">
+        video
+    </div>
+    <div class="modeTab" id="tabWhiteboard">
+        whiteboard
+    </div>
 </div>
 
 <div class="chatbar">
@@ -14,5 +25,5 @@
     <script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
     <script src="~/signalr/hubs"></script>
     <script>var tableID = @ViewBag.TableID;</script>
-    <script src="~/Scripts/Table.js"></script>
+    <script src="~/bundles/table"></script>
 }

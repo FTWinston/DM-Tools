@@ -35,8 +35,9 @@ namespace DMTools.Hubs
             {
                 string name = table.RemoveUser(Context.ConnectionId);
                 if (name != null)
-                    Clients.Group(table.ID.ToString()).showMessage(name + " left the table.");
+                    Clients.Group(table.ID.ToString()).showMessage(name + " left the table. " + (stopCalled ? "Stop called." : "Stop not called."));
             }
+
             return base.OnDisconnected(stopCalled);
         }
 

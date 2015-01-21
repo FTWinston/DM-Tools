@@ -1,7 +1,7 @@
 ﻿var table;
 var userName;
 
-$(function () {
+function initChat() {
     do {
         userName = prompt('Enter your name:', '');
     } while (userName == '');
@@ -45,7 +45,7 @@ $(function () {
         if(e.keyCode==13)
             $('#chatSend').click();
     });
-});
+}
 
 function setupConnection() {
     table.server.join(tableID, userName);

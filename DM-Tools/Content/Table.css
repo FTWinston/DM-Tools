@@ -1,6 +1,32 @@
-﻿.content {
+﻿#tableContent {
     float:left;
     width: 42em;
+}
+
+#tableContent .modeSelector {
+    list-style-type: none;
+    padding-left: 0px;
+    margin-top: 0px;
+}
+
+#tableContent .modeSelector li {
+    display: inline-block;
+    border: solid 1px gray;
+    padding: 5px;
+    cursor:pointer;
+}
+
+#tableContent .modeSelector li.selected {
+    background-color: white;
+    cursor:default;
+}
+
+#tableContent .modeTab {
+    display:none;
+}
+
+#tableContent .modeTab.active {
+    display:block;
 }
 
 .chatbar {
