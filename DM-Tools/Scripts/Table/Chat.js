@@ -2,10 +2,6 @@
 var userName;
 
 function initChat() {
-    do {
-        userName = prompt('Enter your name:', '');
-    } while (userName == '');
-
     table = $.connection.tableHub;
     table.client.showMessage = showMessage;
 

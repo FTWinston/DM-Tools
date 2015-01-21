@@ -272,6 +272,19 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+    <Content Include="Images\erase.png" />
+    <Content Include="Images\erase_dim.png" />
+    <Content Include="Images\line.png" />
+    <Content Include="Images\line_dim.png" />
+    <Content Include="Images\oval.png" />
+    <Content Include="Images\oval_dim.png" />
+    <Content Include="Images\pencil.png" />
+    <Content Include="Images\pencil_dim.png" />
+    <Content Include="Images\rect.png" />
+    <Content Include="Images\rect_dim.png" />
+    <Content Include="Images\save.png" />
+    <Content Include="Images\text.png" />
+    <Content Include="Images\text_dim.png" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -290,6 +303,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\Table\Chat.js" />
     <Content Include="Scripts\Table\Table.js" />
+    <Content Include="Scripts\Table\Whiteboard.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -331,6 +345,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Table\Index.cshtml" />
     <Content Include="Views\Table\Create.cshtml" />
+    <Content Include="Views\Table\WhiteboardPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

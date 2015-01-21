@@ -10,6 +10,7 @@ $(function () {
     } while (userName == '');
 
     initChat();
+    initWhiteboard();
 });
 
 function tabClicked() {

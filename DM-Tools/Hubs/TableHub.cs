@@ -35,7 +35,7 @@ namespace DMTools.Hubs
             {
                 string name = table.RemoveUser(Context.ConnectionId);
                 if (name != null)
-                    Clients.Group(table.ID.ToString()).showMessage(name + " left the table. " + (stopCalled ? "Stop called." : "Stop not called."));
+                    Clients.Group(table.ID.ToString()).showMessage(name + " left the table.");
             }
 
             return base.OnDisconnected(stopCalled);
@@ -108,12 +108,23 @@ namespace DMTools.Hubs
             switch(command)
             {
                 case "roll":
+                case "r":
                     Clients.Caller.showDiceRoll(userName, DiceService.Roll(args));
                     break;
                 default:
                     Clients.Caller.showMessage("Invalid command: " + command);
                     break;
             }
+        }
+
+        public void DrawWhiteboard(int table, string drawObject)
+        {
+            Table t = GetTable(table);
+            if (t == null)
+                return;
+
+            string userName = t.GetUserName(Context.ConnectionId);
+            Clients.OthersInGroup(table.ToString()).HandleDraw(drawObject, userName);
         }
     }
 }
