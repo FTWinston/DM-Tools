@@ -60,9 +60,8 @@ namespace DMTools.Hubs
             else
                 isDM = name == t.DM;
 
-            Clients.Caller.setupUi(isDM);
-            Clients.Caller.showMessage(isDM ? "You are the DM" : t.DM + " is the DM");
             await Groups.Add(Context.ConnectionId, table.ToString());
+            Clients.Caller.setupUi(isDM);
             Clients.Group(table.ToString()).showMessage(name + " joined the table.");
         }
 

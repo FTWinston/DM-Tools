@@ -32,6 +32,10 @@ $(function () {
 
     $.connection.hub.disconnected(function () {
         console.log("Disconnected from server. Reconnecting...");
+
+        if ($.connection.hub.lastError)
+            console.log("Disconnected reason: " + $.connection.hub.lastError.message);
+
         setTimeout(function () { $.connection.hub.start().done(setupConnection); }, 2000);
     });
 
