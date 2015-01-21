@@ -2,10 +2,13 @@
     ViewBag.Title = "Table";
 }
 
+<div class="content">
+</div>
+
 <div class="chatbar">
     <ul id="chat"></ul>
-    <input type="text" id="message" />
-    <input type="button" id="sendmessage" value="Send" />
+    <input type="text" id="chatInput" />
+    <input type="button" id="chatSend" value="Send" />
 </div>
 @section scripts {
     <script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>

@@ -1,1 +1,33 @@
-﻿
+﻿.content {
+    float:left;
+    width: 42em;
+}
+
+.chatbar {
+    float:right;
+    padding-right: 0px;
+    margin-left: 5px;
+}
+
+#chat {
+    border: 1px solid black;
+    overflow:scroll;
+    overflow-x: hidden;
+    width:26em;
+    height: 40em;
+    background-color: #fff;
+
+    list-style-type: none;
+    margin: 0px;
+    padding-left: 5px;
+}
+
+#chatInput {
+    border: 1px solid black;
+    width: 18em;
+}
+
+#chatSend {
+    border: 1px solid black;
+    height: 2em;
+}

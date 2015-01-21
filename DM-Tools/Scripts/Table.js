@@ -18,10 +18,12 @@ $(function () {
 
     table.client.showChatMessage = function (name, message) {
         $('#chat').append('<li><strong>' + htmlEncode(name) + '</strong>: ' + htmlEncode(message) + '</li>');
+        chatUpdated();
     };
 
     table.client.showDiceRoll = function (user, roll) {
         $('#chat').append('<li><em>' + htmlEncode(user) + ' rolls: ' + roll + '</em></li>');
+        chatUpdated();
     };
 
     table.client.setupUi = function (isDM) {
@@ -39,18 +41,18 @@ $(function () {
         setTimeout(function () { $.connection.hub.start().done(setupConnection); }, 2000);
     });
 
-    $('#message').keypress(function(e) {
+    $('#chatInput').keypress(function (e) {
         if(e.keyCode==13)
-            $('#sendmessage').click();
+            $('#chatSend').click();
     });
 });
 
 function setupConnection() {
     table.server.join(tableID, userName);
-    $('#message').focus();
+    $('#chatInput').focus();
 
-    $('#sendmessage').click(function () {
-        var msg = $('#message').val().trim();
+    $('#chatSend').click(function () {
+        var msg = $('#chatInput').val().trim();
             
         if ($.connection.hub.state != $.signalR.connectionState.connected) {
             console.log("Error, not connected. State:" + $.connection.hub.state);
@@ -58,12 +60,18 @@ function setupConnection() {
         }
         if (msg != '')
             table.server.say(tableID, msg);
-        $('#message').val('').focus();
+        $('#chatInput').val('').focus();
     });
 }
 
 function showMessage(message) {
     $('#chat').append('<li><em>' + htmlEncode(message) + '</em></li>');
+    chatUpdated();
+}
+
+function chatUpdated() {
+    var chat = $('#chat').get(0);
+    chat.scrollTop = chat.scrollHeight;
 }
 
 function htmlEncode(value) {
